@@ -14,7 +14,7 @@ from nltk.tokenize.regexp import RegexpTokenizer
 from nltk.tokenize import TreebankWordTokenizer
 from . import attributes
 
-_tokenizer_regexp = ur'''(?ux)
+_tokenizer_regexp = r'''(?ux)
     # the order of the patterns is important!!
     (?:[Mm]\.?[Ss][Cc])\.?|           # M.Sc. with or without capitalization and dots
     (?:[Pp][Hh]\.?[Dd])\.?|           # Same for Ph.D.
@@ -103,9 +103,9 @@ def clean_text(text, correct=True):
     """    
     # replaces different kinds of quotation marks with "
     # take care not to remove apostrophes
-    text = re.sub(ur"(?u)(^|\W)[‘’′`']", r'\1"', text)
-    text = re.sub(ur"(?u)[‘’`′'](\W|$)", r'"\1', text)
-    text = re.sub(ur'(?u)[«»“”]', '"', text)
+    text = re.sub(r"(?u)(^|\W)[‘’′`']", r'\1"', text)
+    text = re.sub(r"(?u)[‘’`′'](\W|$)", r'"\1', text)
+    text = re.sub(r'(?u)[«»“”]', '"', text)
     
     if correct:
         # tries to fix mistyped tokens (common in Wikipedia-pt) as ,, '' ..
@@ -126,7 +126,7 @@ def clean_text(text, correct=True):
 
 
 
-_contractible_base = ur'''(?iux)
+_contractible_base = r'''(?iux)
     (
     [ao]s?|                # definite articles
     um(as?)?|uns|          # indefinite articles

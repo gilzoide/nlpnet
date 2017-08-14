@@ -6,7 +6,10 @@ It can also be invoked in order to create a Metada object
 and save it to a file in the data directory.
 """
 
-import cPickle
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 
 from . import config
 
@@ -93,7 +96,7 @@ class Metadata(object):
         del(save_data['paths'])
         
         with open(filename, 'wb') as f:
-            cPickle.dump(save_data, f, 2)
+            pickle.dump(save_data, f, 2)
     
     @classmethod
     def load_from_file(cls, task, paths=None):
@@ -108,7 +111,7 @@ class Metadata(object):
         # the actual content of the file is the __dict__ member variable, which contain all
         # the instance's data
         with open(paths['metadata_%s' % task], 'rb') as f:
-            data = cPickle.load(f)
+            data = pickle.load(f)
         md.__dict__.update(data)
         
         return md

@@ -20,7 +20,10 @@ import argparse
 import re
 import timeit
 import unicodedata as ud
-from itertools import izip
+try:
+    from itertools import izip
+except ImportError:
+    izip = zip
 import numpy as np
 from collections import Counter, defaultdict
 
@@ -598,7 +601,7 @@ if __name__ == '__main__':
                                        'Type %(prog)s [TASK] -h to get task-specific help.')
     
     # base parser with arguments not related to any model
-    base_parser = argparse.ArgumentParser(add_help=False)    
+    base_parser = argparse.ArgumentParser(add_help=False)
     base_parser.add_argument('-v', help='Verbose mode', action='store_true', dest='verbose')
     base_parser.add_argument('--gold', help='File with gold standard data', type=str, required=True)
     base_parser.add_argument('--data', help='Directory with trained models (default: current directory)', 
@@ -627,6 +630,7 @@ if __name__ == '__main__':
 
     parser_pos.add_argument('--oov', help='Analyze performance on OOV data. Not fully functional with numbers.', type=str)
     args = parser.parse_args()
+    print(args)
     
     logging_level = logging.DEBUG if args.verbose else logging.INFO
     utils.set_logger(logging_level)

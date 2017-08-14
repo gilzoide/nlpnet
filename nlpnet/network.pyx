@@ -14,7 +14,10 @@ from cpython cimport bool
 import h5py as h5
 import os
 
-from itertools import izip
+try:
+    from itertools import izip
+except ImportError:
+    izip = zip
 import logging
 
 ctypedef np.float_t FLOAT_t

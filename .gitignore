@@ -8,3 +8,8 @@ nlpnet/network.pyd
 build
 dist
 MANIFEST
+*.egg-info
+
+# Text backups
+*~
+*.swp

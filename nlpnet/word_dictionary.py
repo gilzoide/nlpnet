@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import itertools
+try:
+    from itertools import izip
+except ImportError:
+    izip = zip
+    xrange = range
 from collections import Counter, OrderedDict as OD
 
 class WordDictionary(dict):
@@ -57,7 +61,7 @@ class WordDictionary(dict):
             size = len(words)
         
         # set all words in the dictionary
-        for word, num in itertools.izip(words, xrange(size)):
+        for word, num in izip(words, xrange(size)):
             self[word] = num
         
         # if the given words include one of the the rare or padding symbols, don't replace it

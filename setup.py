@@ -1,6 +1,6 @@
 import numpy as np
-from distutils.core import setup
-from distutils.extension import Extension
+from setuptools import setup, Extension
+from Cython.Build import cythonize
 
 
 def readme():
@@ -12,9 +12,10 @@ setup(
     name='nlpnet',
     description='Neural networks for NLP tasks',
     packages=['nlpnet', 'nlpnet.pos', 'nlpnet.srl', 'nlpnet.parse'],
+    #  ext_modules=cythonize('nlpnet/network.pyx'),
     ext_modules=[
         Extension(
-            "nlpnet.network", 
+            "nlpnet.network",
             ["nlpnet/network.c"],
             include_dirs=['.', np.get_include()]
         )
@@ -27,7 +28,8 @@ setup(
     ],
     install_requires=[
         'numpy>=1.9.0',
-        'nltk>=3.2.2'
+        'nltk>=3.2.2',
+        'h5py',
     ],
     license='MIT',
     version='1.2.1',

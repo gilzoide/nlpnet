@@ -5,12 +5,18 @@ Class for dealing with SRL data.
 """
 
 from collections import defaultdict
-import cPickle
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 import logging
 import re
 import os
 import numpy as np
-from itertools import izip
+try:
+    from itertools import izip
+except ImportError:
+    izip = zip
 
 from .. import attributes
 from .. import utils

@@ -6,7 +6,10 @@ Taggers wrapping the neural networks.
 
 import logging
 import numpy as np
-from itertools import izip
+try:
+    from itertools import izip
+except ImportError:
+    izip = zip
 
 from . import utils
 from . import config
